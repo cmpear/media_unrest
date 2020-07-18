@@ -1,0 +1,145 @@
+,city,query,hits
+0,"/""District of Columbia/""",any,1130000
+1,"/""District of Columbia/""",violence,28000
+2,"/""District of Columbia/""",looting,46
+3,"/""District of Columbia/""",arson,15800
+4,Atlanta,any,2490000
+5,Atlanta,violence,697000
+6,Atlanta,looting,38400
+7,Atlanta,arson,25800
+8,Austin,any,1630000
+9,Austin,violence,159000
+10,Austin,looting,10500
+11,Austin,arson,7650
+12,Baltimore,any,1570000
+13,Baltimore,violence,130000
+14,Baltimore,looting,8450
+15,Baltimore,arson,41
+16,Boston,any,2140000
+17,Boston,violence,233000
+18,Boston,looting,13500
+19,Boston,arson,5770
+20,Chicago,any,2850000
+21,Chicago,violence,1130000
+22,Chicago,looting,58900
+23,Chicago,arson,14900
+24,Cincinnati,any,1350000
+25,Cincinnati,violence,22400
+26,Cincinnati,looting,31
+27,Cincinnati,arson,36
+28,Cleveland,any,80500
+29,Cleveland,violence,73100
+30,Cleveland,looting,7200
+31,Cleveland,arson,7450
+32,Columbus,any,1380000
+33,Columbus,violence,136000
+34,Columbus,looting,12900
+35,Columbus,arson,9360
+36,Dallas,any,1960000
+37,Dallas,violence,116000
+38,Dallas,looting,10700
+39,Dallas,arson,7130
+40,Denver,any,1530000
+41,Denver,violence,83900
+42,Denver,looting,29
+43,Denver,arson,9470
+44,Detroit,any,1510000
+45,Detroit,violence,972000
+46,Detroit,looting,49
+47,Detroit,arson,11800
+48,Houston,any,2050000
+49,Houston,violence,267000
+50,Houston,looting,44
+51,Houston,arson,11500
+52,Indianapolis,any,1210000
+53,Indianapolis,violence,51200
+54,Indianapolis,looting,4370
+55,Indianapolis,arson,43
+56,Kansas City,any,124000
+57,Kansas City,violence,67600
+58,Kansas City,looting,6190
+59,Kansas City,arson,14500
+60,Las Vegas,any,157000
+61,Las Vegas,violence,73800
+62,Las Vegas,looting,9220
+63,Las Vegas,arson,4510
+64,Los Angeles,any,601000
+65,Los Angeles,violence,706000
+66,Los Angeles,looting,96500
+67,Los Angeles,arson,17500
+68,Madison,any,1250000
+69,Madison,violence,98500
+70,Madison,looting,10400
+71,Madison,arson,7260
+72,Miami,any,1900000
+73,Miami,violence,218000
+74,Miami,looting,15700
+75,Miami,arson,5110
+76,New York,any,7620000
+77,New York,violence,2830000
+78,New York,looting,289000
+79,New York,arson,52200
+80,Newark,any,529000
+81,Newark,violence,106000
+82,Newark,looting,21
+83,Newark,arson,32
+84,Oakland,any,1080000
+85,Oakland,violence,139000
+86,Oakland,looting,26200
+87,Oakland,arson,7580
+88,Oklahoma City,any,82100
+89,Oklahoma City,violence,91600
+90,Oklahoma City,looting,7850
+91,Oklahoma City,arson,34
+92,Orlando,any,1620000
+93,Orlando,violence,97000
+94,Orlando,looting,28
+95,Orlando,arson,6360
+96,Philadelphia,any,1740000
+97,Philadelphia,violence,311000
+98,Philadelphia,looting,24000
+99,Philadelphia,arson,9700
+100,Phoenix,any,1510000
+101,Phoenix,violence,75800
+102,Phoenix,looting,8900
+103,Phoenix,arson,6620
+104,Pittsburgh,any,1280000
+105,Pittsburgh,violence,40300
+106,Pittsburgh,looting,43
+107,Pittsburgh,arson,47
+108,Portland,any,1640000
+109,Portland,violence,72900
+110,Portland,looting,7210
+111,Portland,arson,4660
+112,Sacramento,any,879000
+113,Sacramento,violence,29400
+114,Sacramento,looting,8760
+115,Sacramento,arson,4160
+116,Salt Lake City,any,31900
+117,Salt Lake City,violence,22000
+118,Salt Lake City,looting,3390
+119,Salt Lake City,arson,5590
+120,San Antonio,any,121000
+121,San Antonio,violence,29300
+122,San Antonio,looting,4000
+123,San Antonio,arson,46
+124,San Diego,any,189000
+125,San Diego,violence,93500
+126,San Diego,looting,40
+127,San Diego,arson,6390
+128,San Francisco,any,355000
+129,San Francisco,violence,229000
+130,San Francisco,looting,22300
+131,San Francisco,arson,10100
+132,Seattle,any,2120000
+133,Seattle,violence,436000
+134,Seattle,looting,24600
+135,Seattle,arson,9560
+136,St. Louis,any,138000
+137,St. Louis,violence,385000
+138,St. Louis,looting,16400
+139,St. Louis,arson,6330
+140,Tampa,any,1500000
+141,Tampa,violence,33400
+142,Tampa,looting,7100
+143,Tampa,arson,35
