@@ -57,7 +57,10 @@ df = pd.DataFrame({     'city' : sorted(cities * len(queries)),
                         'query': queries * len(cities),
                         'hits' : [0] * len(queries) * len(cities) })
 
-subscription_key = "29e9c06b82784655862dca3cf8fe773d"
+strPath = '/home/chmpearson/keys/bing_sub_key.txt'
+f = open(strPath)
+subscription_key = f.read()
+
 endpoint  = 'https://api.cognitive.microsoft.com/bing/v7.0/news/search'
 since       = '2020-06-30'
 headers = {"Ocp-Apim-Subscription-Key" : subscription_key}

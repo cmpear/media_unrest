@@ -1,0 +1,29 @@
+{"_type": "News",
+     "readLink": "https://api.cognitive.microsoft.com/api/v7/news/search?q=%22Kristiana+Coignard%22%2b%22Longview%22",
+      "queryContext": 
+      {"originalQuery": "\"Kristiana Coignard\"+\"Longview\"", 
+        "adultIntent": false}, 
+        "totalEstimatedMatches": 2, 
+        "sort": [{"name": "Best match", 
+            "id": "relevance", 
+            "isSelected": true, 
+            "url": "https://api.cognitive.microsoft.com/api/v7/news/search?q=%22Kristiana+Coignard%22%2b%22Longview%22"}, 
+            {"name": "Most recent", "id": "date", "isSelected": false, 
+                "url": "https://api.cognitive.microsoft.com/api/v7/news/search?q=%22Kristiana+Coignard%22%2b%22Longview%22&sortby=date"}], 
+                "value": [{"name": "<b>Longview</b> police release video of officer-involved shooting", 
+                    "url": "https://www.kltv.com/story/27964641/longview-police-release-video-of-officer-involved-shooting-teen/", 
+                    "description": "<b>LONGVIEW</b>, TX (KLTV) - Editor&#39;s note: KLTV has made the editorial decision not to air footage of the moment of <b>Kristiana Coignard</b>&#39;s death. The video attached shows the moments leading up to Coignard&#39;s death. The video may still be disturbing to some.", 
+                    "about": [{"readLink": "https://api.cognitive.microsoft.com/api/v7/entities/aaf19d13-58a4-47ac-8373-bfb2b100e648", 
+                        "name": "Officer"},
+                         {"readLink": "https://api.cognitive.microsoft.com/api/v7/entities/a65b8085-9857-4537-948b-403030bc953f",
+                         "name": "Longview"},
+                         {"readLink": "https://api.cognitive.microsoft.com/api/v7/entities/7c58267c-b73d-bdd3-40e5-9869f2162206", "name": "Shooting"}],
+                     "provider": [{"_type": "Organization", "name": "KLTV", "image": {"thumbnail":
+                         {"contentUrl": "https://www.bing.com/th?id=AR_8fbecdf974b4b695a8838ab1781e9a4f&pid=news"}}}], 
+                    "datePublished": "2015-01-28T21:31:00.0000000Z"}, 
+                        {"name": "<b>Longview</b> PD to supporters: &#39;Stay home and pray&#39;", 
+                        "url": "https://www.kltv.com/story/28048212/longview-pd-to-supporters-stay-home-and-pray/", 
+                        "description": "All of this is in response to the shooting death of 17-year-old <b>Kristiana Coignard</b> inside the <b>Longview</b> police department lobby. Coignard was armed with a knife and was shot four times when she lunged at an officer. Coignard&#39;s family hired an attorney on ...",
+                         "provider": [{"_type": "Organization", "name": "KLTV", "image": 
+                        {"thumbnail": {"contentUrl": "https://www.bing.com/th?id=AR_8fbecdf974b4b695a8838ab1781e9a4f&pid=news"}}}]
+, "datePublished": "2015-02-07T00:47:00.0000000Z"}]}

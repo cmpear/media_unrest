@@ -35,7 +35,7 @@ import os
 this_dir = os.path.dirname(os.path.realpath('__file__') )
 target = os.path.join(this_dir, 'fatal_police_shootings.csv')
 df = pd.read_csv(target, delimiter=',')
-
+print(target)
 update_if_less_than = pd.to_datetime('2020-07-21')
 today = pd.to_datetime('today')
 
@@ -50,7 +50,7 @@ for i, ID in enumerate(df['ID']):
     fname   = 'cases/case_' + str(ID) + '.json'
     target  =  os.path.join(this_dir, fname)
     if df.UPDATED[i] < update_if_less_than:
-        df.loc(i, 'UPDATED') = today
+        df.loc[i, 'UPDATED'] = today
 #    print(df.UPDATED > pd.to_datetime('1901-01-01') )
 #    print(target)
 #    print(df.loc[i,'UPDATED'])
