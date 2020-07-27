@@ -1,0 +1,234 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(readr)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(stringr)
+library(ggplot2)
+```
+
+
+```{r}
+df <- readr::read_csv('shoots_w_hits.csv') %>%
+  select(- X1, - PRIORITY) %>%
+  filter(ARMED_BIN == 'unarmed')
+```
+```{r}
+df %>%
+  mutate('RACE' = if_else(RACE %in% c('Native American','Other','Unlisted','Asian'), 'Other/Unlisted', RACE) ) %>%
+  dplyr::filter(HITS != 0) %>%
+  dplyr::arrange(HITS) %>%
+  ggplot2::ggplot(aes(x = HITS) ) + geom_histogram(stat = 'bin') + facet_wrap(~RACE)
+```
+
+```{r}
+df %>%
+  group_by(RACE) %>%
+  summarize(TOTAL_HITS = sum(HITS) ) %>%
+  ggplot2::ggplot(aes(y = TOTAL_HITS, x = RACE) ) + geom_bar(stat = 'identity', col = hcl(h=250),fill = hcl(h = 250, c = 40, l = 85, alpha = 0.7))
+```
+
+```{r}
+df %>%
+  mutate('COVERED' = if_else(HITS == 0, 'Uncovered', 'Covered')) %>%
+  group_by(RACE) %>%
+  ggplot2::ggplot(aes(x = RACE, group =  COVERED, fill = COVERED)) + geom_bar(stat = 'count') + theme_classic()
+```
+```{r}
+df %>%
+  filter(HITS >= 100) %>%
+  group_by(RACE) %>%
+#  summarize(TOTAL_HITS = sum(HITS) ) %>%
+  ggplot2::ggplot(aes( x = RACE) ) + geom_bar(stat = 'count', col = hcl(h=130),fill = hcl(h = 130, c = 40, l = 85, alpha = 0.7))
+```
+
+```{r}
+df %>%
+  filter(HITS >= 100) %>%
+  select(NAME, DATE, AGE, GENDER, RACE, CITY, STATE, THREAT, FLEE, BODY_CAM)
+```
+
+```{r}
+df %>%
+  filter(HITS >= 100 && HITS < 200000) %>%
+  group_by(RACE) %>%
+  summarize(TOTAL_HITS = sum(HITS) ) %>%
+  ggplot2::ggplot(aes( x = RACE, y = TOTAL_HITS) ) + geom_bar(stat = 'identity', col = hcl(h=130),fill = hcl(h = 130, c = 40, l = 85, alpha = 0.7))
+```
+
+# Who Are These People?
+
+Since we have reduced the number of cases to a small sample size, it may be useful to look at what these cases have in common
+
+## Thought he had or Reached for a Weapon
+
+There are a total of four cases where someone is thought to have had a weapon.  In three of these cases, the officers were mistaken, and in one there is disagreement as to what happened.  Some of these resulted in investigations, but no officers were fired or convicted over these.
+
+Jamar Clark (24, Black) was shot in Minneapolis during an encounter with two police officers.  Advocates for Clark claim that he was handcuffed when he was shot, whereas the officers claim that Clark was trying to grab an officer's gun.
+
+https://www.startribune.com/what-we-know-about-the-death-of-jamar-clark/353199331/
+
+Antwon Rose (17, Black) was killed after fleeing following a traffic stop.  Rose had been in the backseat of an unlicensed taxicab when the back-seat passenger had rolled down a window and shot at two men.
+
+https://www.nbcnews.com/news/us-news/pennsylvania-officer-who-fatally-shot-antwon-rose-east-pittsburg-acquitted-n986546
+
+Stephon Clark (23, Black) was shot in Sacramento after police were dispatched in response to a 911 call reporting a man in a black hoodie breaking car windows.  The officers encountered Clark who climbed over a fence into his grandmother's backyard and was looking through the window of her car when police saw him.  Clark was told to raise his hands, but instead fled around the corner to a picnic table in the backyard.  When police rounded the corner, they mistakenly thought he had a weapon and opened fire.   Clark did not have a weapon on or near his body.
+
+https://www.cnn.com/2019/03/07/us/sacramento-stephon-clark-shooting/index.html
+https://www.youtube.com/watch?v=VTlZqEsPY78
+
+Terence Crutcher (40, Black) was shot in Tulsa on September 16, 2016.  Crutcher's SUV had broken down in the road.  A woman called 911 and "said an abandoned vehicle was blocking the street and a man was running away, warning that it was going to blow up."  The first officer who arrived at the scene did so while responding to another call.  The officers thought Crutcher was possibly under the influence and wanted to arrest him.  At one point, Crutcher was walking to his car with four officers pointing weapons at him.  The officers claim Crutcher reached into his car, possibly for a weapon.  Two officers responded: one with a firearm and the other with a stun gun.  No weapon was found in the car or on Crutcher.
+
+https://www.cnn.com/2016/09/20/us/oklahoma-tulsa-police-shooting/index.html
+
+## Those who Fled
+
+There are a total of five cases where the victim fled.  Two of these we have already mentioned under those suspected to have weapons.  Here, two of the officers lost their jobs and were later convicted.
+
+Walter Scott (50, black) was shot after he was pulled over for a broken taillight.  For unclear reasons, Scott fled the vehicle.  The officer shot at Scott eight times and hitting him five times.  The officer then handcuffed Scott despite his injuries.  The officer was fired and ultimately sentence to 20 years in prison.  The officer lost his job and sentence to 20 years in prison.
+
+https://www.nbcnews.com/storyline/walter-scott-shooting/walter-scott-shooting-michael-slager-ex-officer-sentenced-20-years-n825006
+
+Michael Ramos	(42, hispanic) was shot when police were called to his apartment complex to investigate possible drug-trading.  Police tried to arrest  Ramos,using beanbag shotgun ammunition, but when  Ramos got in his car and started driving one of the officers used lethal force.
+
+https://www.kvue.com/article/news/local/apd-michael-ramos-shooting-video-release/269-bb03e737-b9fa-49b8-ab47-cf084cd23bcf
+
+Nicholas Bils (36, white) was shot in the back after escaping from a California State Park Officer's car.   Bils had a history of mental illness, suffering from paranoia and schizophrenia.  The officer is being charged wtih second-degree homicide.
+
+https://www.nydailynews.com/news/national/ny-san-diego-deputy-second-degree-murder-20200714-khvps4ukxjftrjqlxc7nskxquy-story.html
+
+
+## Other
+
+The remaining four cases are not easy to classify.  Two are related to police raids, but have little else in common aside from the anodyne observation that more caution may have avoided these.  A third case involves a woman who was shot when approaching police for help regarding a possible crime, and a fourth involved a young man assaulting a police officer.
+
+Breonna Taylor (26, black) was killed during a no-knock raid on her home at 1am.  She and her boyfriend, Kenneth Walker, thought their apartment was being broken into, and Walker grabbed a gun and began firing at the three plainclothes police officers who had entered their home--hitting one in the leg.  In the firefight, Ms. Taylor (unarmed) was shot eight times.   Walker was arrested and charged with assault and attempted murder on a police officer.  Neither Ms. Taylor nor Walker were subject to the investigation.  An entire book could be written on this case--partly explaining why there are over 200,000 news stories on it.
+
+https://www.nbcnews.com/news/us-news/breonna-taylor-police-shooting-what-we-know-about-kentucky-woman-n1207841
+
+Andrew Finch (28, white) was a young man killed on December 28 after a prankster called police telling them that  Finch "was the suspect who had shot his own father and had been holding his younger brother and mother hostage."  
+
+https://www.nbcnews.com/news/us-news/wichita-officer-who-killed-andrew-finch-swatting-mistake-won-t-n865626
+
+Justine Damond (33, white) from Minneapolis who was shot in July 2017 after calling police about a possible rape and approaching a squad car in the alley behind her home.  The shooter, Mohamed Noor, was charged for third-degree homicide and sec
+apologized for "taking the life of a perfect person," and was sentenced to 12 and a half years in prison. 
+
+https://www.theguardian.com/us-news/2019/jun/07/justine-damond-death-mohamed-noor-minneapolis
+
+"Tony Robinson [19, black] was shot Friday night [March 6, 2015] after assaulting Officer Matt Kenny, Madison Police Chief Mike Koval said."
+
+https://www.cbc.ca/news/world/tony-robinson-19-killed-by-madison-police-after-traffic-disturbance-was-unarmed-1.2985693
+
+
+# Summary
+
+It should be kept in mind that this is NOT a representative sample of police shooting cases.  Rather, it is a sample of those stories that got the most coverage.  Thus, the racial composition is not reflective of acftual data on police shootings, but instead the biases of the media--which we have already established favor cases with black victims.  This plays into the narrative that the police are biased against black victims.  Moreover, the media also favors stories that are sensational or favor narratives of excessive police force or unaccountability.
+
+Looking at the racial angle, seven of these cases involve black victims, while only three involve white victims, and one involve a hispanic victim.  This is despite a plurality of police shooting victims being white.  Moreover, the most covered of these three cases was Bils, who suffered from mental illness; while the other two were covered much less.
+
+Mental Illness is rather fascinating for how it intersects with race
+
+The issue of excessive police force is also in play.  After Breona Taylor, the two most covered cases involve suspects fleeing police.  Meanwhile, the least covered non-white cases were all committed by officers who thought the victim to be armed or reaching for a weapon.  In general, the news seems to favor suspects attempting to flee over suspects who did not flee--but Breonna Taylor, who never had the option to flee, is the most notable exception here.  The 200,000+ stories about Taylor alone are enough to shift the balance from victims who were fleeing to those who were not.
+
+```{r}
+df %>%
+  filter(HITS < 100000) %>%
+  mutate('COVERED' = if_else(HITS == 0, 'Uncovered', 'Covered')) %>%
+  mutate('RACE' = if_else(RACE %in% c('Native American','Other','Unlisted','Asian'), 'Other/Unlisted', RACE) ) %>%
+  mutate('MENTAL_ILLNESS_SIGNS' = if_else(MENTAL_ILLNESS_SIGNS, 'Signs of Mental Illness', 'No Signs') ) %>%
+  group_by(MENTAL_ILLNESS_SIGNS, RACE) %>%
+  summarize('HITS' = sum(COVERED) / length(COVERED) ) %>%
+  ggplot2::ggplot(aes(x = MENTAL_ILLNESS_SIGNS, y = HITS, group = COVERED, fill = COVERED) ) +
+  geom_bar(stat = 'identity', position = 'stack') + facet_wrap(~ RACE)
+```
+
+
+```{r}
+df %>%
+  filter(HITS > 0 & HITS < 100000) %>%
+  mutate('RACE' = if_else(RACE %in% c('Native American','Other','Unlisted','Asian'), 'Other/Unlisted', RACE) ) %>%
+  mutate(AGE =  paste0(as.character(trunc(AGE / 15) * 15 + 15), '-', as.character(trunc(AGE / 15) * 15 + 15)) ) %>%
+  mutate(AGE = str_pad(AGE, 3, 'left', '0')) %>%
+  group_by(AGE, RACE) %>%
+  summarize('AVERAGE_HITS' = mean(HITS) ) %>%
+  ggplot2::ggplot(aes(x = AGE, y = AVERAGE_HITS) ) +  geom_bar(stat = 'identity') + facet_wrap(~ RACE)
+```
+
+
+```{r}
+df %>%
+  filter(HITS > 0 & HITS < 200000) %>%
+  mutate('RACE' = if_else(RACE %in% c('Native American','Other','Unlisted','Asian'), 'Other/Unlisted', RACE) ) %>%
+  group_by(RACE, FLEE) %>%
+  summarize(TOTAL_HITS = sum(HITS) ) %>%
+  ggplot2::ggplot(aes(x = FLEE, y = TOTAL_HITS, fill = RACE)) + geom_bar(stat = 'identity') + facet_wrap(~RACE) +
+  scale_y_continuous(trans = 'log10') +
+  ggtitle(label = "Total News Hits by Race and Whether Victim Fled", subtitle = 'Excluding Breonna Taylor') +
+  xlab("Fleeing or Not") + ylab("Total Hits") +
+  theme(axis.text.x = element_text(angle = 270), legend.position = 'none' )
+```
+
+
+
+```{r}
+df %>%
+  filter(HITS >= 100 & HITS < 20000) %>%
+  ggplot2::ggplot(aes(x = reorder(NAME, HITS), y = HITS, group = RACE, fill = RACE)) + geom_bar(stat = 'identity') +
+  theme(axis.text.x = element_text(angle = 315) )
+```
+
+
+## Possible Weapon
+
+Narrowing in on the remaining eight cases, three involved suspects who were mistakenly beleived to have or be reaching for weapons.  Antwon Rose fled from a car from which another passenger had recently shot a gun.  Stephen Clark had fled around the corner of his grandmother's house, and the officer mistook him for having a gun.  Terence Crutcher was acting strangely, not listening to police, walked to his car, and two officers thought he was reaching for a weapon and shot him.
+
+If one has studied videos where police are shot, or watched some of the videos used to train officers in these situations, these cases become easier to understand.  These shootings often occur suddenly, and with only the faintest warnings that something is wrong--and that something is often a refusal to listen to everything the officer says.  Suspects who flee are sometimes running to a weapon, as officers beleived was the case with Clark.  Sometimes the suspect has a gun in their car, as officers believed to be the case with Crutcher.  And frustratingly, it is often the hesitency of officers to use force that puts these officers in danger.
+
+## Fleeing (no weapon accusation)
+
+The cases of fleeing are a bit different.  Ramos fled, got to his car, and started it either to run or use as a weapon.  Bils had escaped from a police vehicle and was running away.  Scott fled from his vehicle after being pulled over and was shot as well.  Those last two cases both resulted in murder charges against the officer.
+
+## 
+
+
+
+
+I've included links to three videos to make the above points.  The first shows how surprising these can be, but nobody is hit and the video is therefore non-graphic.  
+
+https://www.youtube.com/watch?v=Wy1qbLjkJnY (surprising, nobody hurt, non-graphic)
+
+The second and third are much more disturbing.  In the second, officer Quincy Smith is chasing after Macolm Orr after a robbery attempt.  Smith insists Orr take his hand out of his pocket and threatens to taze him; Orr draws a gun and shoots at Smith eight times--hitting him four times (Smith survives).  
+
+https://www.youtube.com/watch?v=7Qq3dXfzvdw (officer shot, survives)
+
+The third video shows two officers attempting to arrest a man who was speeding (87mph) and may have been on some substance.  The man resists and is tazed.  The officers continue trying to cuff the man, but he continues to resist and runs to the open driver-side window.  With the officers pointing guns at him, he reaches in, grabs a pistol, and shoots both officers.
+
+https://www.youtube.com/watch?v=ccSM9RTbmS0&has_verified=1 (two officers shot, man had gun in car, near-fatal, graphic)
+
+These examples are not intended to exonerate the officers involved.  But it is important to understand that there are possible repurcussions to some of the proposed solutions to police shootings.  Rose, Clark, and Crutcher were the false positives: cases where officers mistakeningly thought the suspect had a weapon.  The videos I showed above were the false negatives: cases where officers mistakenly behaved as though the suspect did not have a weapon.  To these are added two additional problems: false positives reduce trust in the police; while false negatives reduce the willingness of police to enforce the law.  Many 'solutions' are best understood as adjustments: they reduce one type of risk by incrasing another.
+
+
+
+
+
+Six of these involve subjects who fled.  
+
+that make the police look bad.  Six of these suspects were fleeing, and four mistakenly thought to have held or be reaching for weapons.  One could also add a fifth who was accused of reaching for an officer's firearm. 
+
+Looking at these cases, most can belong to one of two categories.  The first category consists of people running fleeing police.  Police were in the process of arresting Michael Ramos when he fled and had already been employing less-lethal ammutation when he hopped in his car.  Nicholas Bils had escaped from an officer's car and was fleeing on foot when he was shot.  Walter Scott, perhaps fearing delinquency on childcare payments could turn this into an arrest, fled from his car after being pulled over for a taillight.
+
+The second category consists of people the police thought had a weapon or were reaching for a weapon.  The first two cases overlap with the fleeing cases.  Antwon Rose fled the car he was in after another passenger had shot at two people on the street and officers pulled them over.  The shooting officer claimed he thought he saw Clark holding something in his hand, which may have been a weapon.  Stephen Clark was shot as police were searching for a late-night vandal.  Clark fled aroudn the corner, and police then mistook him for having a weapon and shot.  The other two cases are a bit different.  Officers claim that Jamar Clark was reaching for an officer's gun.  Finally, Terrence Crutcher was not responding to the requests of police who were trying to arrest him, walked to his SUV, and then the officers claim he seemed to be reaching for a gun.
+
+The remaining cases are not easily groupped.  Andrew Finch was killed by a SWAT team that had been pranked into expecting a hostage situation.  Tony Robinson had been assaulting the officer that shot him.  Justine Damond had only been trying to report a possible rape.
+
+Then there is Breona Taylor and Kenneth Walker.  Had Walker been a criminal on the run, the case would likely go mostly unmentioned, but he was not.  Taylor, Walker, and their household seem at most tenuously connected to the investigation the police had been carrying out.  The raid itself seems unnecessary from an outsider's perspective--and thus avoidable.  Then there are the compounding factors: this was a no-knock raid by plainclothes police officers at 1am; the firefight that ensued; Taylor killed in the crossfire; and Walker charged with assault.
+
